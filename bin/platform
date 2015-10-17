@@ -1,0 +1,2 @@
+#!/bin/sh
+/data/app/nodejs/bin/node /data/app/platform/lib/platform.js $*
