@@ -15,10 +15,11 @@
 PROG="platform"
 MSG_PREFIX=" *"
 PROG_BASE="/data/app/$PROG"
-PROG_PATH="$PROG_BASE/bin/$PROG" #::# Not need, but sometimes helpful (if $PROG resides in /opt for example).
-PROG_ARGS=""
+PROG_PATH="$PROG_BASE/lib/$PROG.js" #::# Not need, but sometimes helpful (if $PROG resides in /opt for example).
 PROG_PID="$PROG_BASE/logs/$PROG.pid"
 PROG_LOG="$PROG_BASE/logs/$PROG.log"
+PROG_ARGS="10000 $PROG_BASE/conf/accounts /data/app/nginx/conf/oauth $PROG_PID"
+PROG_NODE="/data/app/nodejs/bin/node"
 
 start() {
 	PROG_STATUS=0
@@ -39,8 +40,7 @@ start() {
 		echo "$MSG_PREFIX $PROG is currently running..."
 		exit 1
     else
-        ## Change from /dev/null to something like /var/log/$PROG if you want to save output.
-        $PROG_PATH $PROG_ARGS >>  $PROG_LOG &
+        $PROG_NODE $PROG_PATH $PROG_ARGS >> $PROG_LOG 2>&1 &
         echo "$MSG_PREFIX $PROG started"
     fi
 }
@@ -49,6 +49,7 @@ stop() {
     if [ -e "$PROG_PID" ]; then
         ## Program is running, so stop it
       	kill -9 $(cat $PROG_PID)
+		rm -rf $PROG_PID
 		sleep 1
        	echo "$MSG_PREFIX $PROG stopped"
     else

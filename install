@@ -12,6 +12,7 @@ if [ -d "$PROG_PATH" ] ; then
 fi
 
 mkdir -p $PROG_PATH
+mkdir -p $PROG_PATH/logs
 
 cp -v -n -r bin $PROG_PATH/bin
 cp -v -n -r conf $PROG_PATH/conf
@@ -24,13 +25,14 @@ if [ -f "/etc/init.d/$PROG" ] ; then
 	rm -f /etc/init.d/$PROG
 fi
 
-ln -s PROG_PATH/$PROG /etc/init.d/$PROG
+ln -s $PROG_PATH/$PROG /etc/init.d/$PROG
 
-chmod 755 PROG_PATH/$PROG
+chmod 755 $PROG_PATH/bin/$PROG
+chmod 755 $PROG_PATH/$PROG
 chmod 755 /etc/init.d/$PROG
 
 if [ -x "/usr/bin/node" ] ; then
-	echo "$MSG_PREFIX install nodejs"
+	echo "$MSG_PREFIX installed nodejs"
 else
 	echo "$MSG_PREFIX not install nodejs"
 	exit 1
