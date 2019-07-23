@@ -1,0 +1,12 @@
+[Unit]
+Description=platform service
+After=syslog.target
+
+[Service]
+ExecStart=/data/app/platform/platform start                                                                                                             
+#ExecStop=/data/app/platform/platform stop
+StandardOutput=syslog
+StandardError=syslog
+
+[Install]
+WantedBy=multi-user.target
