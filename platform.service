@@ -3,7 +3,7 @@ Description=platform service
 After=syslog.target
 
 [Service]
-ExecStart=/data/app/platform/platform start                                                                                                             
+ExecStart=/data/app/nodejs/bin/node /data/app/platform/lib/platform.js 10000 /data/app/platform/logs/platform.pid                                                                                                     
 #ExecStop=/data/app/platform/platform stop
 StandardOutput=syslog
 StandardError=syslog

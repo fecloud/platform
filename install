@@ -18,12 +18,11 @@ cp -v -n -r bin $PROG_PATH/bin
 cp -v -n -r conf $PROG_PATH/conf
 cp -v -n -r lib $PROG_PATH/lib
 
-cp -v -n -r lib $PROG $PROG.service $PROG_PATH/
+cp -v -n -r $PROG.service $PROG_PATH/
 
 ln -s $PROG_PATH/$PROG.service /etc/systemd/system/$PROG.service 
 
 chmod 755 $PROG_PATH/bin/$PROG
-chmod 755 $PROG_PATH/$PROG
 
 if [ -x "/data/app/nodejs/bin/node" ] ; then
 	echo "$MSG_PREFIX installed nodejs"
